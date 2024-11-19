@@ -1,0 +1,21 @@
+CREATE TABLE IF NOT EXISTS "user" (
+    id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    username TEXT UNIQUE,
+    password TEXT,
+    is_admin BOOLEAN DEFAULT FALSE
+);
+
+CREATE TABLE IF NOT EXISTS "weapon" (
+    id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    name TEXT UNIQUE,
+    description TEXT,
+    damage INT,
+    price INT
+);
+
+CREATE TABLE IF NOT EXISTS "user_weapon" (
+    id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    user_id INT REFERENCES "user"(id) ON DELETE CASCADE,
+    weapon_id INT REFERENCES "weapon"(id) ON DELETE CASCADE,
+    count int
+);
